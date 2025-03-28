@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+  **User Management Dashboard**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive React application for managing users with authentication, pagination, and CRUD operations.
 
-## Available Scripts
+  **Features**
 
-In the project directory, you can run:
+- **User Authentication**
+  - Login with JWT token
+  - Token persistence using localStorage
+  - Protected routes
 
-### `npm start`
+- **User Management**
+  - View user list with avatars
+  - Edit user details
+  - Delete users with confirmation
+  - Infinite scroll pagination
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **UI/UX**
+  - Responsive design (mobile & desktop)
+  - Modern card-based layout
+  - Interactive modals
+  - Loading states
+  - Error handling
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+      **Tech Used**
 
-### `npm test`
+- **Frontend**
+  - React 
+  - React Hooks (useState, useEffect)
+  - Reqres API 
+  - Axios for HTTP requests
+  - CSS3 with Flexbox/Grid
+  
+     **How It Works**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Authentication Flow**
+1. User submits login form with email/password
+2. App sends request to ReqRes.in mock API
+3. On success:
+   - Receives JWT token
+   - Stores token in browser's localStorage
+   - Redirects to protected users page
 
-### `npm run build`
+**User Management**
+#### Loading Users
+- Fetches users from ReqRes.in API with pagination
+- Automatically detects when no more users are available
+- "Load More" button disappears when all users are loaded
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Editing Users
+1. Click "Edit" on any user card
+2. Modal opens with user's current details
+3. Changes are saved [local]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Deleting Users
+1. Click "Delete" on any user card
+2. Confirmation pop-up appears
+3. On confirm: 
+   - Removes user from local state
+   - Updates UI instantly
+#### Compatibility
+-Works perfectly on Desktop and Mobile
