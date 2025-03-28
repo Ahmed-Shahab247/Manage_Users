@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchUsersFromAPI } from "../services/userService";
-import './UserList.css'; 
+import './UserList.css';
 
 
 //Main file to display the list of users
@@ -13,6 +13,8 @@ TODO:
 5. Logout button is required to delete the session token redirect to loginPage
 
 */
+
+
 const UsersList = ({ onLogout }) => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
@@ -59,50 +61,48 @@ const UsersList = ({ onLogout }) => {
   };
 
   return (
+<div className="users-container">
+  <header className="users-header">
+    <h2>Users List</h2>
+    <button onClick={onLogout} className="logout-btn">
+      Logout
+    </button>
+  </header>
 
-    <div className="users-container">
-      <header className="users-header">
-        <h2>Users List</h2>
-        <button onClick={onLogout} className="logout-btn">
-          Logout
-        </button>
-      </header>
-
-      {/* User Grid */}
-      <div className="users-grid">
-        {users.map(user => (
-          <div key={user.id} className="user-card">
-            <img 
-              src={user.avatar} 
-              alt={`${user.first_name} ${user.last_name}`}
-              className="user-avatar"
-            />
-            <div className="user-info">
-              <h3>{user.first_name} {user.last_name}</h3>
-              <p>ID: {user.id}</p>
-            </div>
-            <div className="user-actions">
-              <button 
-                onClick={() => setEditingUser({...user})}
-                className="edit-btn"
-              >
-                Edit
-              </button>
-              <button 
-                onClick={() => {
-                  setSelectedUser(user);
-                  setShowDeleteModal(true);
-                }}
-                className="delete-btn"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+  <div className="users-grid">
+    {users.map(user => (
+      <div key={user.id} className="user-card">
+        <img 
+          src={user.avatar} 
+          alt={`${user.first_name} ${user.last_name}`}
+          className="user-avatar"
+        />
+        <div className="user-info">
+          <h3>{user.first_name} {user.last_name}</h3>
+          <p>ID: {user.id}</p>
+          <p className="user-email">{user.email}</p>
+        </div>
+        <div className="user-actions">
+          <button 
+            onClick={() => setEditingUser({...user})}
+            className="edit-btn"
+          >
+      Edit
+    </button>
+    <button 
+      onClick={() => {
+        setSelectedUser(user);
+        setShowDeleteModal(true);
+      }}
+      className="delete-btn"
+    >
+            Delete
+          </button>
+        </div>
       </div>
+    ))}
+  </div>
 
-      
       <div className="load-more-section">
         {loading ? (
           <div className="loading-spinner">Loading...</div>
@@ -118,7 +118,6 @@ const UsersList = ({ onLogout }) => {
         )}
       </div>
 
-      {/* Delete Modal */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -142,48 +141,60 @@ const UsersList = ({ onLogout }) => {
         </div>
       )}
 
-      {/* Edit Modal */}
       {editingUser && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Edit User</h3>
-            <div className="form-group">
-              <label>First Name:</label>
-              <input
-                value={editingUser.first_name}
-                onChange={(e) => setEditingUser({
-                  ...editingUser,
-                  first_name: e.target.value
-                })}
+<div className="modal-overlay">
+  <div className="modal-content">
+    <h3>Edit User</h3>
+    <div className="form-group">
+      <label>First Name:</label>
+      <input
+        value={editingUser.first_name}
+        onChange={(e) => setEditingUser({
+          ...editingUser,
+          first_name: e.target.value
+        })}
               />
-            </div>
-            <div className="form-group">
-              <label>Last Name:</label>
-              <input
-                value={editingUser.last_name}
-                onChange={(e) => setEditingUser({
-                  ...editingUser,
-                  last_name: e.target.value
-                })}
-              />
-            </div>
-            <div className="modal-actions">
-              <button 
-                onClick={handleEdit}
-                className="save-btn"
-              >
-                Save
-              </button>
-              <button 
-                onClick={() => setEditingUser(null)}
-                className="cancel-btn"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+    </div>
+    <div className="form-group">
+      <label>Last Name:</label>
+      <input
+        value={editingUser.last_name}
+        onChange={(e) => setEditingUser({
+          ...editingUser,
+          last_name: e.target.value
+        })}
+      />
+    </div>
+    <div className="form-group">
+      <label>Email:</label>
+      <input
+        value={editingUser.email || ''}
+        onChange={(e) => setEditingUser({
+          ...editingUser,
+          email: e.target.value
+        })}
+        type="text"
+        placeholder="user@example.com"
+      />
+      <p className="mock-notice">Note: Change email</p>
+    </div>
+    <div className="modal-actions">
+      <button 
+        onClick={handleEdit}
+        className="save-btn"
+      >
+        Save Changes
+      </button>
+      <button 
+        onClick={() => setEditingUser(null)}
+        className="cancel-btn"
+      >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };
