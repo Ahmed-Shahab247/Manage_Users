@@ -250,3 +250,15 @@
       padding: 20px;
     }
   }
+.user-email {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 4px 0 0;
+  }
+  
+  .mock-notice {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+  }
